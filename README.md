@@ -42,6 +42,8 @@ npm run dev
 - Your Spotify profile
 - Your top artists
 
+<img width="644" alt="image" src="https://github.com/user-attachments/assets/f73d3207-cc71-4ba7-a972-50ace0578e57" />
+
 ## 4. Docker
 
 Build and run docker container 
