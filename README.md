@@ -41,3 +41,16 @@ npm run dev
 
 - Your Spotify profile
 - Your top artists
+
+## 4. Docker
+
+Build and run docker container 
+
+``` bash
+docker build -t spotify-app .
+docker run -p 8080:80 spotify-app
+```
+
+Take a look your browser `http://localhost:8080`.
+
+> That's it floks.
