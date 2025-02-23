@@ -22,7 +22,8 @@ export const fetchClient = async <T>(
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return response.json();
+    const data = await response.json(); 
+    return data;
   } catch (error) {
     console.error("Fetch error:", error);
     throw error;

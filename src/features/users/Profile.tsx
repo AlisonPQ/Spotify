@@ -3,8 +3,9 @@ import { User } from "../../app/models/user";
 import { useStore } from "../../app/stores/store";
 import { useAuth } from "../../app/context/AuthContext";
 import { Avatar, Card, CardContent, CircularProgress, styled, Typography } from "@mui/material";
-import { observer } from "mobx-react-lite";
 import SpotifyButton from "../../app/common/SpotifyButton";
+import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCard = styled(Card)({
   maxWidth: 400,
@@ -29,18 +30,22 @@ export default observer(function Profile() {
   const { userStore } = useStore();
   const { token } = useAuth();
 
+  const navigate = useNavigate();
+
+  const goToMyTopArtists = () => {
+    navigate("/topartists");
+  };
+
   useEffect(() => {
     if (token) {
-      userStore.getUserProfile(token);
-      setUser(userStore.user);
+      userStore.getUserProfile(token).finally(() => {setUser(userStore.user)});
     }
   }, [token, userStore]);
-
 
   if (!user) {
     return <CircularProgress sx={{ color: "#1DB954", display: "block", margin: "auto" }} />;
   }
-
+  
   return (
     <>
       <ProfileCard>
@@ -57,8 +62,7 @@ export default observer(function Profile() {
           <Typography variant="body2">🌍 {user.country}</Typography>
         </CardContent>
       </ProfileCard>
-
-      <SpotifyButton>Play Now</SpotifyButton>
+      <SpotifyButton onClick={goToMyTopArtists} >See my top Artists</SpotifyButton>
     </>
   );
-})
+});

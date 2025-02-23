@@ -11,21 +11,13 @@ export default class UserStore {
   }
 
   getUserProfile = async (token: string) => {
-    this.loading = true;
     try {
-      const userProfile: User | undefined = await getUserProfileFromService(token);
+      const user = await getUserProfileFromService(token);
       runInAction(() => {
-        this.user = userProfile;
-        this.loading = false;
-        console.log("User profile fetched:", this.user);
+        this.user = user;
       });
     } catch (error) {
-      runInAction(() => {
-        this.loading = false;
-      });
-      console.error("Failed to fetch user profile:", error);
+      console.log(error);
     }
   }
-
-  
 }
